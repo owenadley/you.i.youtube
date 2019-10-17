@@ -1,0 +1,61 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.searchBar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 5%;
+}
+.searchBar .inputSubmit {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+}
+.searchBar input {
+  width: 60%;
+  margin-right: 20px;
+  padding: 10px;
+  border-width: 1px 2px 3px 1px;
+  border-radius: 10px;
+  border-color: #e12145;
+}
+.searchBar input:focus {
+  outline: none;
+  border-radius: 3px;
+  border-width: 0px 0px 4px 0px;
+}
+.searchBar .inputSubmit button {
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  color: #fff;
+  border: 0px;
+  background-color: #e12145;
+  cursor: pointer;
+}
+
+.playerContainer {
+  margin-top: 20px;
+}
+.playerContainer iframe {
+  width: 90%;
+  height: 500px;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  background-color: #ecf0f1;
+  padding: 20px;
+}
+.header h1 {
+  color: #e12145;
+}
+.header .logo {
+  height: 90px;
+  padding-right: 10px;
+}
