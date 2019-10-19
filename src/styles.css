@@ -3,6 +3,7 @@
   text-align: center;
 }
 
+/* search bar styles */
 .searchBar {
   display: flex;
   flex-direction: column;
@@ -28,7 +29,7 @@
   border-radius: 3px;
   border-width: 0px 0px 4px 0px;
 }
-.searchBar .inputSubmit button {
+.searchBar button {
   padding: 10px 20px;
   border-radius: 10px;
   font-weight: bold;
@@ -37,7 +38,14 @@
   background-color: #e12145;
   cursor: pointer;
 }
+.searchForm {
+  display: flex;
+  align-items: flex-start;
+  align-self: left;
+  width: 90%;
+}
 
+/* player container styles */
 .playerContainer {
   margin-top: 20px;
 }
@@ -45,7 +53,23 @@
   width: 90%;
   height: 500px;
 }
+.playerContainer .playerMetadata {
+  display: flex;
+  flex-direction: column;
+  padding-left: 5%;
+}
+.playerContainer .playerMetadata p {
+  text-align: left;
+  margin-bottom: 5px;
+}
+.playerMetadata p#descr {
+  margin-left: 10px;
+}
+.playerMetadata p#channel {
+  margin-left: 10px;
+}
 
+/* header styles */
 .header {
   display: flex;
   justify-content: center;
@@ -58,4 +82,14 @@
 .header .logo {
   height: 90px;
   padding-right: 10px;
+}
+
+/* error & warnings */
+.error {
+  font-weight: bold;
+  color: red;
+}
+.warning {
+  font-weight: bold;
+  color: orange;
 }

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import PlayerContainer from "./Components/PlayerContainer";
+import SearchBar from "./Components/SearchBar";
 
-// declare constants for youtube api call
+// declare constants for youtube api
 const KEY = "AIzaSyBU5pOvliAQ5GQdXyqHcfeSGxJTJKtG8wQ";
 const TYPE = "video";
 const PART = "snippet";
@@ -13,13 +15,14 @@ class App extends Component {
       activeVideoId: "",
       activeVideoTitle: "",
       activeVideoDesc: "",
-      activeVideoChannel: ""
+      activeVideoChannel: "",
+      invalidSearch: false
     };
   }
 
   componentDidMount() {}
 
-  // handle change as user updates the search term by updating state
+  // save search term to state as user types it
   handleSearch = search => {
     this.setState({
       searchTerm: search.target.value
@@ -27,12 +30,11 @@ class App extends Component {
   };
 
   // handle search using google youtube api and entered search term
-  // save search results to 'searchResults' state
+  // save search results to state
   searchYoutube = () => {
     var searchUrl = `https://www.googleapis.com/youtube/v3/search?key=${KEY}&type=${TYPE}&part=${PART}&q=${
       this.state.searchTerm
     }`;
-    console.log(searchUrl);
     fetch(searchUrl)
       .then(function(response) {
         if (response.status >= 400) {
@@ -42,54 +44,50 @@ class App extends Component {
       })
       .then(data => {
         this.setState({
+          invalidSearch: false,
           // automatically select the first returned result
           activeVideoId: data.items[0].id.videoId,
           activeVideoTitle: data.items[0].snippet.title,
           activeVideoDesc: data.items[0].snippet.description,
           activeVideoChannel: data.items[0].snippet.channelTitle
         });
-        console.log(data.items[0].snippet.title);
       })
       .catch(error => {
+        this.setState({ invalidSearch: true });
         console.error(error);
       });
   };
 
   render() {
-    var url = `https://www.youtube.com/embed/${this.state.activeVideoId}`;
+    var url = this.state.activeVideoId
+      ? `https://www.youtube.com/embed/${this.state.activeVideoId}`
+      : ``;
 
     return (
       <div className="App">
-        <div class="header">
-          <img class="logo" alt="you.i logo" src="./youi-logo.png" />
+        <div className="header">
+          <img className="logo" alt="you.i logo" src="./youi-logo.png" />
           <h1>
             <i>x Youtube</i>
           </h1>
         </div>
 
-        <div className="searchBar">
-          <p>Search Youtube with any keyword:</p>
-          <div class="inputSubmit">
-            <input
-              type="text"
-              value={this.state.searchTerm}
-              onChange={this.handleSearch}
-              placeholder="keyword search, i.e 'you.i TV'"
-            />
-            <button type="submit" onClick={this.searchYoutube}>
-              Search
-            </button>
-          </div>
-        </div>
+        {/* for demonstratation components & props: */}
+        <SearchBar
+          searchTerm={this.state.searchTerm}
+          searchYoutube={this.searchYoutube}
+          handleSearch={this.handleSearch}
+        />
 
-        <div class="playerContainer">
-          <iframe title="YoutubePlayer" src={url} />
-          <div class="playerMetadata">
-            <p>{this.state.activeVideoTitle}</p>
-            <p>{this.state.activeVideoDesc}</p>
-            <p>{this.state.activeVideoChannel}</p>
-          </div>
-        </div>
+        {/* for demonstration of components & props */}
+        <PlayerContainer
+          url={url}
+          activeVideoId={this.state.activeVideoId}
+          invalidSearch={this.state.invalidSearch}
+          activeVideoTitle={this.state.activeVideoTitle}
+          activeVideoDesc={this.state.activeVideoDesc}
+          activeVideoChannel={this.state.activeVideoChannel}
+        />
       </div>
     );
   }
