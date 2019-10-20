@@ -17,7 +17,7 @@ class SearchBar extends Component {
     return (
       <div className="searchBar">
         <p>Search Youtube with any keyword:</p>
-        <div class="inputSubmit">
+        <div className="inputSubmit">
           <input
             type="text"
             value={this.props.searchTerm}

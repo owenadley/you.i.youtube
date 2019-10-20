@@ -29,7 +29,7 @@ class App extends Component {
     });
   };
 
-  // handle search using google youtube api and entered search term
+  // handle search using google youtube api and search term
   // save search results to state
   searchYoutube = () => {
     var searchUrl = `https://www.googleapis.com/youtube/v3/search?key=${KEY}&type=${TYPE}&part=${PART}&q=${
@@ -60,7 +60,9 @@ class App extends Component {
 
   render() {
     var url = this.state.activeVideoId
-      ? `https://www.youtube.com/embed/${this.state.activeVideoId}`
+      ? `https://www.youtube.com/embed/${
+          this.state.activeVideoId
+        }?enablejsapi=1`
       : ``;
 
     return (
@@ -72,7 +74,7 @@ class App extends Component {
           </h1>
         </div>
 
-        {/* for demonstratation components & props: */}
+        {/* for demonstratation of components & props: */}
         <SearchBar
           searchTerm={this.state.searchTerm}
           searchYoutube={this.searchYoutube}
