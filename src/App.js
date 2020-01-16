@@ -3,7 +3,7 @@ import PlayerContainer from "./Components/PlayerContainer";
 import SearchBar from "./Components/SearchBar";
 
 // declare constants for youtube api
-const KEY = "AIzaSyBU5pOvliAQ5GQdXyqHcfeSGxJTJKtG8wQ";
+const KEY = "";
 const TYPE = "video";
 const PART = "snippet";
 
